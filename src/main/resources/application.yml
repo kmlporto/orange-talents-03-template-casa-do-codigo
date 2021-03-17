@@ -1,6 +1,10 @@
-pring:
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
   datasource:
-    url: jdbc:h2:mem:alura-forum
+    url: jdbc:h2:mem:casa-do-codigo
     driverClassName: org.h2.Driver
     username: sa
     password:
