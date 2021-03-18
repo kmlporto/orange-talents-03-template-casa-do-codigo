@@ -1,6 +1,6 @@
 package br.com.zup.desafios.casadocodigo.autor;
 
-import br.com.zup.desafios.casadocodigo.validator.anotattion.EmailUnico;
+import br.com.zup.desafios.casadocodigo.validator.anotattion.UniqueValue;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +11,7 @@ public class AutorPersist {
     private String nome;
     @Email
     @NotBlank
-    @EmailUnico
+    @UniqueValue(clazz = Autor.class, field = "email")
     private String email;
     @NotBlank
     @Size(max = 200)

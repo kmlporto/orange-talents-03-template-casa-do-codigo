@@ -1,11 +1,11 @@
 package br.com.zup.desafios.casadocodigo.Categoria;
 
-import br.com.zup.desafios.casadocodigo.validator.anotattion.NomeCategoriaUnico;
+import br.com.zup.desafios.casadocodigo.validator.anotattion.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaPersist {
-    @NomeCategoriaUnico
+    @UniqueValue(clazz = Categoria.class, field = "nome")
     @NotBlank
     private String nome;
 
