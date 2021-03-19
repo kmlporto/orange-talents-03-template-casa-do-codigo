@@ -7,12 +7,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livros")
@@ -43,5 +45,14 @@ public class LivroController {
         Page<Livro> autorPage = livroRepository.findAll(pageable);
 
         return new ResponseEntity<>(LivroItemResponse.convert(autorPage), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroDetailResponse> consulta(@PathVariable Long id){
+        Optional<Livro> optionalLivro = livroRepository.findById(id);
+        if(!optionalLivro.isPresent()){
+            return ResponseEntity.badRequest().build();
+        }
+        return new ResponseEntity<>(LivroDetailResponse.convert(optionalLivro.get()), HttpStatus.OK);
     }
 }
