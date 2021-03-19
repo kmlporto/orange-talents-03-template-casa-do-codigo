@@ -2,8 +2,11 @@ package br.com.zup.desafios.casadocodigo.livro;
 
 import br.com.zup.desafios.casadocodigo.Categoria.CategoriaRepository;
 import br.com.zup.desafios.casadocodigo.autor.AutorRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +33,15 @@ public class LivroController {
         if(!autorRepository.existsById(livroPersist.getAutor_id()) || !categoriaRepository.existsById(livroPersist.getCategoria_id())){
             return ResponseEntity.badRequest().build();
         }
-
         Livro livro = livroRepository.save(livroPersist.convert(autorRepository, categoriaRepository));
 
         return new ResponseEntity<>(LivroResponse.convert(livro), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<Page<LivroItemResponse>> lista(Pageable pageable){
+        Page<Livro> autorPage = livroRepository.findAll(pageable);
+
+        return new ResponseEntity<>(LivroItemResponse.convert(autorPage), HttpStatus.OK);
+    }
 }
