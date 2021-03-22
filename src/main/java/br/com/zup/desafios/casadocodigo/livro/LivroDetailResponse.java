@@ -30,75 +30,51 @@ public class LivroDetailResponse {
         return new LivroDetailResponse(livro);
     }
 
-    public String getTitulo() {
-        return titulo;
+    public LivroDetailResponse(String titulo, String resumo, String sumario, String nomeAutor, String descricaoAutor, Double preco, Integer nPaginas, String isbn, LocalDateTime dataPublicacao) {
+        this.titulo = titulo;
+        this.resumo = resumo;
+        this.sumario = sumario;
+        this.nomeAutor = nomeAutor;
+        this.descricaoAutor = descricaoAutor;
+        this.preco = preco;
+        this.nPaginas = nPaginas;
+        this.isbn = isbn;
+        this.dataPublicacao = dataPublicacao;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getTitulo() {
+        return titulo;
     }
 
     public String getResumo() {
         return resumo;
     }
 
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
-
     public String getSumario() {
         return sumario;
-    }
-
-    public void setSumario(String sumario) {
-        this.sumario = sumario;
     }
 
     public String getNomeAutor() {
         return nomeAutor;
     }
 
-    public void setNomeAutor(String nomeAutor) {
-        this.nomeAutor = nomeAutor;
-    }
-
     public String getDescricaoAutor() {
         return descricaoAutor;
-    }
-
-    public void setDescricaoAutor(String descricaoAutor) {
-        this.descricaoAutor = descricaoAutor;
     }
 
     public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     public Integer getnPaginas() {
         return nPaginas;
-    }
-
-    public void setnPaginas(Integer nPaginas) {
-        this.nPaginas = nPaginas;
     }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public LocalDateTime getDataPublicacao() {
         return dataPublicacao;
-    }
-
-    public void setDataPublicacao(LocalDateTime dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
     }
 }

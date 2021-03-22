@@ -21,15 +21,8 @@ public class EstadoPersist {
         return pais_id;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
+    public EstadoPersist(@NotBlank String nome, @NotNull Long pais_id) {
         this.nome = nome;
-    }
-
-    public void setPais_id(Long pais_id) {
         this.pais_id = pais_id;
     }
 }

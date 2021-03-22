@@ -4,7 +4,6 @@ import br.com.zup.desafios.casadocodigo.Categoria.CategoriaRepository;
 import br.com.zup.desafios.casadocodigo.autor.AutorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,14 +36,14 @@ public class LivroController {
         }
         Livro livro = livroRepository.save(livroPersist.convert(autorRepository, categoriaRepository));
 
-        return new ResponseEntity<>(LivroResponse.convert(livro), HttpStatus.OK);
+        return ResponseEntity.ok(LivroResponse.convert(livro));
     }
 
     @GetMapping
     public ResponseEntity<Page<LivroItemResponse>> lista(Pageable pageable){
         Page<Livro> autorPage = livroRepository.findAll(pageable);
 
-        return new ResponseEntity<>(LivroItemResponse.convert(autorPage), HttpStatus.OK);
+        return ResponseEntity.ok(LivroItemResponse.convert(autorPage));
     }
 
     @GetMapping("/{id}")
@@ -53,6 +52,6 @@ public class LivroController {
         if(!optionalLivro.isPresent()){
             return ResponseEntity.badRequest().build();
         }
-        return new ResponseEntity<>(LivroDetailResponse.convert(optionalLivro.get()), HttpStatus.OK);
+        return ResponseEntity.ok(LivroDetailResponse.convert(optionalLivro.get()));
     }
 }

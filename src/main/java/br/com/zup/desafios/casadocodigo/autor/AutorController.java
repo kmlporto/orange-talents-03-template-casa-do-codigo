@@ -1,6 +1,5 @@
 package br.com.zup.desafios.casadocodigo.autor;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +21,6 @@ public class AutorController {
     @PostMapping
     public ResponseEntity<AutorResponse> cadastra(@RequestBody @Valid AutorPersist autorPerist){
         Autor autor = autorRepository.save(autorPerist.convert());
-        return new ResponseEntity<>(AutorResponse.convert(autor), HttpStatus.OK);
+        return ResponseEntity.ok(AutorResponse.convert(autor));
     }
 }

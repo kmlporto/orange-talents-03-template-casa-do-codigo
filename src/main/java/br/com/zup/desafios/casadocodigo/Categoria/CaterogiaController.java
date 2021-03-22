@@ -1,6 +1,5 @@
 package br.com.zup.desafios.casadocodigo.Categoria;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +22,6 @@ public class CaterogiaController {
     public ResponseEntity<CategoriaResponse> cadastra(@RequestBody @Valid CategoriaPersist categoriaPersist){
         Categoria categoria = categoriaRepository.save(categoriaPersist.convert());
 
-        return new ResponseEntity<>(CategoriaResponse.convert(categoria), HttpStatus.OK);
+        return ResponseEntity.ok(CategoriaResponse.convert(categoria));
     }
 }

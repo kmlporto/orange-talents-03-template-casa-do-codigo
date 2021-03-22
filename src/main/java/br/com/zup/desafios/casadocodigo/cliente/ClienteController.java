@@ -4,7 +4,6 @@ import br.com.zup.desafios.casadocodigo.localizacao.estado.Estado;
 import br.com.zup.desafios.casadocodigo.localizacao.estado.EstadoRepository;
 import br.com.zup.desafios.casadocodigo.localizacao.pais.Pais;
 import br.com.zup.desafios.casadocodigo.localizacao.pais.PaisRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +32,6 @@ public class ClienteController {
         Estado estado = estadoRepository.getOne(clientePersist.getEstado_id());
         Cliente cliente = clienteRepository.save(clientePersist.convert(estado, pais));
 
-        return new ResponseEntity<>(ClienteResponse.convert(cliente), HttpStatus.OK);
+        return ResponseEntity.ok(ClienteResponse.convert(cliente));
     }
 }

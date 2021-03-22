@@ -35,79 +35,39 @@ public class LivroResponse {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitulo() {
         return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getResumo() {
         return resumo;
     }
 
-    public void setResumo(String resumo) {
-        this.resumo = resumo;
-    }
-
     public String getSumario() {
         return sumario;
-    }
-
-    public void setSumario(String sumario) {
-        this.sumario = sumario;
     }
 
     public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
     public Integer getnPaginas() {
         return nPaginas;
-    }
-
-    public void setnPaginas(Integer nPaginas) {
-        this.nPaginas = nPaginas;
     }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public LocalDateTime getDataPublicacao() {
         return dataPublicacao;
-    }
-
-    public void setDataPublicacao(LocalDateTime dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
     }
 
     public Long getCategoria_id() {
         return categoria_id;
     }
 
-    public void setCategoria_id(Long categoria_id) {
-        this.categoria_id = categoria_id;
-    }
-
     public Long getAutor_id() {
         return autor_id;
-    }
-
-    public void setAutor_id(Long autor_id) {
-        this.autor_id = autor_id;
     }
 }
