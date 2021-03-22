@@ -4,12 +4,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
@@ -23,41 +23,22 @@ public class ErroValidacaoHandler {
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public List<ErroForm> handle(MethodArgumentNotValidException exception){
-        List<ErroForm> erroslist = new ArrayList<>();
+    public ValidationErrorOutDto handle(MethodArgumentNotValidException exception){
+        List<ObjectError> globalErrors = exception.getBindingResult().getGlobalErrors();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
-        fieldErrors.forEach(e -> {
-            String mensagem = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-            ErroForm erroDeFormulario = new ErroForm(e.getField(), mensagem);
-            erroslist.add(erroDeFormulario);
-        });
 
-        return  erroslist;
+        return buildValidationError(globalErrors, fieldErrors);
     }
 
-    static class ErroForm{
-        private String campo;
-        private String erro;
+    private ValidationErrorOutDto buildValidationError(List<ObjectError> globalErrors, List<FieldError> fieldErrors){
+        ValidationErrorOutDto validationErrors = new ValidationErrorOutDto();
+        globalErrors.forEach(error -> validationErrors.addError(getErrorMessage(error)));
+        fieldErrors.forEach(error -> validationErrors.addFieldError(error.getField(), getErrorMessage(error)));
 
-        public ErroForm(String campo, String erro) {
-            this.campo = campo;
-            this.erro = erro;
-        }
-
-        public String getCampo() {
-            return campo;
-        }
-
-        public void setCampo(String campo) {
-            this.campo = campo;
-        }
-
-        public String getErro() {
-            return erro;
-        }
-
-        public void setErro(String erro) {
-            this.erro = erro;
-        }
+        return validationErrors;
     }
+    private String getErrorMessage(ObjectError error){
+        return messageSource.getMessage(error, LocaleContextHolder.getLocale());
+    }
+
 }
